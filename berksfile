@@ -1,0 +1,5 @@
+site :opscode
+
+cookbook 'nginx'
+cookbook 'php', '~> 1.5.0'
+cookbook 'php-fpm'
