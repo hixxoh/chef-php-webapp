@@ -26,8 +26,13 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
         
         chef.add_recipe "nginx"
         chef.add_recipe "php"
+        chef.add_recipe "mysql2_chef_gem"
+        chef.add_recipe "database"
+        chef.add_recipe "php"
         chef.add_recipe "php-fpm"
         chef.add_recipe "myapp"
+        
+        
         
         chef.json = {
             "php-fpm" => {
@@ -43,15 +48,23 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                     }
                 }
             },
-                "app" => {
-                    "web_dir" => '/vagrant/www'
+            "app" => {
+                "web_dir" => '/vagrant/www',
+                "mysql" => {
+                    "server_root_password" => "mysql",
+                    "connect_user" => "mt_user",
+                    "connect_password" => "password",
+                    "connect_database" => "mt_auth"
                 }
+            }
         }
         chef.run_list = [
             "recipe[nginx]",
             "recipe[php]",
+            "recipe[php::module_mysql]",
             "recipe[php-fpm]",
-            "recipe[myapp::nginx-fpm]"
+            "recipe[myapp::nginx-fpm]",
+            "recipe[myapp::mysql-php]"
         ]
     end
 end

@@ -1,0 +1,9 @@
+# .vagrant
+.vagrant
+
+# chef
+cookbooks/
+
+# berkshelf
+berksfile.lock
+
