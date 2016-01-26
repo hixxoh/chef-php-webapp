@@ -1,8 +1,8 @@
 server {
     #listen       80;
-    server_name  192.168.10.100;
+    server_name  <%= node['app']['web']['server_name'] %>;
 
-    root   /vagrant/www/web;
+    root   <%= node['app']['web']['document_root'] %>;
     index  index.php;
 
     location ~ \.php$ {

@@ -7,8 +7,8 @@
 # All rights reserved - Do Not Redistribute
 #
 
-%w(public logs).each do |dir|
-  directory "#{node.app.web_dir}/#{dir}" do
+%w(web logs).each do |dir|
+  directory "#{node.app.web.application_root}/#{dir}" do
     #owner node.user.name
     mode "0755"
     recursive true
@@ -25,7 +25,7 @@ nginx_site "localarea"
 #  action :restart
 #end
 
-#cookbook_file "#{node.app.web_dir}/public/index.html" do
+#cookbook_file "#{node.app.web.application_root}/web/index.html" do
 #  source "index.html"
 #  mode 0755
 #  #owner node.user.name

@@ -1,9 +1,14 @@
 VAGRANTFILE_API_VERSION = "2"
 
+local_ip = '192.168.10.100'
+application_root = '/vagrant/www'
+document_root = [application_root , 'web'].join('/')
+server_name = local_ip
+
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.box = "ubuntu-14.04-amd64-vbox"
     config.vm.box_url = "https://oss-binaries.phusionpassenger.com/vagrant/boxes/latest/ubuntu-14.04-amd64-vbox.box"
-    config.vm.network :public_network, ip:'192.168.10.100'
+    config.vm.network :public_network, ip:local_ip
     config.vm.provider :virtualbox do |vm|
         vm.name = "web_vm"
     end
@@ -49,7 +54,11 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
                 }
             },
             "app" => {
-                "web_dir" => '/vagrant/www',
+                "web" => {
+                    "application_root" => application_root,
+                    "document_root" => document_root,
+                    "server_name" => server_name,
+                },
                 "mysql" => {
                     "server_root_password" => "mysql",
                     "connect_user" => "mt_user",
