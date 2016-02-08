@@ -9,6 +9,7 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     config.vm.box = "ubuntu-14.04-amd64-vbox"
     config.vm.box_url = "https://oss-binaries.phusionpassenger.com/vagrant/boxes/latest/ubuntu-14.04-amd64-vbox.box"
     config.vm.network :public_network, ip:local_ip
+    config.vm.network "forwarded_port", guest: 80, host: 8080
     config.vm.provider :virtualbox do |vm|
         vm.name = "web_vm"
     end
