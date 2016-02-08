@@ -7,3 +7,9 @@ cookbooks/
 # berkshelf
 berksfile.lock
 
+# Bundler
+bin/*
+.bundle/*
+
+.kitchen/
+.kitchen.local.yml
